@@ -23,12 +23,5 @@ app.listen(port, () => {
 });
 
 
-userAdminCondicion = 'admin_'
-
-  if (userAdminCondicion.includes( admin_)) {
-    loginIngreso = true; 
-  }
-
-
 
 
