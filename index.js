@@ -21,3 +21,14 @@ const port = 3400;
 app.listen(port, () => {
   console.log(`El servidor esta corriendo el puerto ${port}`);
 });
+
+
+userAdminCondicion = 'admin_'
+
+  if (userAdminCondicion.includes( admin_)) {
+    loginIngreso = true; 
+  }
+
+
+
+
