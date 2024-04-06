@@ -15,7 +15,7 @@ const emailRegistro = async (datos) => {
   await transport.sendMail({
     from: "inventoryappml.com",
     to: email,
-    subject: "Confirma tu cuenta en inventoryappml.com",
+    subject: "Confirma tu cuenta en inventoryapp.com",
     text: "Confirma tu cuenta en inventoryappml.com",
     html: `
               <p> ¡Hola ${usuario}!, esperamos que estés muy bien ;)</p>  
@@ -43,9 +43,9 @@ const emailOlvidePassword = async (datos) => {
 
   const { email, nombre, token } = datos;
 
-  //enviar email
+  //enviar emails
   await transport.sendMail({
-    from: "inventoryappml.com",
+    from: "inventoryapp.com",
     to: email,
     subject: "Reestablece tu cuenta en inventoryappml.com",
     text: "Reestablece tu cuenta en inventoryappml.com",

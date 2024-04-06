@@ -2,6 +2,7 @@ import express from "express";
 import csurf from "csurf";
 import cookieParser from "cookie-parser";
 import usuarioRoutes from "./routes/usuarioRoutes.js";
+import assetsRoutes from "./routes/assetsRoutes.js"
 import db from "./config/db.js";
 
 //crear la app
@@ -37,6 +38,7 @@ app.use(express.static("public"));
 
 //routing
 app.use("/auth", usuarioRoutes);
+app.use("/", assetsRoutes);
 
 //definir puerto y arrancar proyecto
 

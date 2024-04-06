@@ -1,14 +1,15 @@
 import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 import Usuario from "../models/Usuario.js";
-import { generarJWT,generarId } from "../helpers/tokens.js";
+import { generarJWT, generarId } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/email.js";
 
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
     pagina: "Iniciar Sesión",
     csrfToken: req.csrfToken(),
+    usuario: req.user,
   });
 };
 
@@ -34,10 +35,10 @@ const autenticar = async (req, res) => {
       errores: resultado.array(),
     });
   }
-  const { email, contraseña} = req.body;
+  const { email, contraseña } = req.body;
 
   //comprobar si el usuario existe
-  const usuario = await Usuario.findOne({where: { email }});
+  const usuario = await Usuario.findOne({ where: { email } });
   if (!usuario) {
     return res.render("auth/login", {
       pagina: "Iniciar Sesión",
@@ -48,26 +49,34 @@ const autenticar = async (req, res) => {
 
   //comprobar si el usuario está confirmado
   if (!usuario.confirmado) {
-    return res.render('auth/login', {
+    return res.render("auth/login", {
       pagina: "iniciar sesión",
       csrfToken: req.csrfToken(),
-      errrores: [{msg: 'la cuenta no esta confirmada'}],
+      errrores: [{ msg: "la cuenta no esta confirmada" }],
     });
   }
 
   //verificar el Password
-  if(!usuario.verificarPassword(contraseña)) {
-    return res.render('auth/login', {
+  if (!usuario.verificarPassword(contraseña)) {
+    return res.render("auth/login", {
       pagina: "inciar sesión",
       csrfToken: req.csrfToken(),
-      errores: [{msg: 'Contraseña incorrecta'}]
+      errores: [{ msg: "Contraseña incorrecta" }],
     });
   }
 
   //autenticar el usuario
-  const token = generarJWT({id: usuario.id, usuario: usuario.usuario})
+  const token = generarJWT({ id: usuario.id, usuario: usuario.usuario });
 
-  console.log(token)
+  console.log(token);
+
+  //Almacenar en un cookie
+  return res
+    .cookie("_token", token, {
+      hhtpOlnly: true,
+      secure: true, //habilitar para deploy 'no util en local por el certifcado SSL'
+    })
+    .redirect("/assets");
 };
 
 const formularioRegistro = (req, res) => {
@@ -297,7 +306,7 @@ const nuevoPassword = async (req, res) => {
   // Hashear el nuevo password
   const salt = await bcrypt.genSalt(10);
   usuario.password = await bcrypt.hash(password, salt);
-  usuario.token = null;
+  usuario.token = null;  
 
   await usuario.save();
 
