@@ -8,7 +8,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "server": "nodemon index.js",
-    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch"
+    "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
+    "db:importar": "node ./seed/seeders.js -i",
+    "db:eliminar": "node ./seed/seeders.js -e"
+    
   },
   "keywords": [
     "MVC"

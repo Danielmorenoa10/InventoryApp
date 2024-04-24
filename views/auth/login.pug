@@ -7,12 +7,12 @@ block contenido
         h2.text-center.text-2xl= pagina
 
         if errores 
-            div(class= "max-w-md mx-auto my10")
+            div(class= "max-w-md mx-auto my-10")
                 each error in errores 
                     p.bg-red-600.text.white.uppercase.text.xs.text-center.p-2.mb-1.font-bold= error.msg
 
         .mt-2.mx-auto.max-w-96.py-3
-            .bg-white.py-3.px-2
+            .bg-white.py-3.px-2.drop-shadow-2xl.rounded-xl
                 form.space-y-5(method= "POST" action="/auth/login")
                     input(type="hidden" name="_csrf" value=csrfToken)
                     div 
@@ -26,6 +26,6 @@ block contenido
                         a.text-gray-500.text-xs(href="/auth/olvide-password") Olvide mi contraseña
                         a.text-gray-500.text-xs(href="/auth/registro") Registrarme                        
 
-                    input(class="w-full bg-cyan-400 hover:bg-lime-400 py-2 text-white uppercase font-bold rounded-xl"  type="submit" value="Iniciar sesión")
+                    input(class="w-full bg-cyan-400 hover:bg-lime-400  py-2 text-white uppercase font-bold rounded-xl"  type="submit" value="Iniciar sesión")
                         
 

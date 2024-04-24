@@ -1,20 +1,41 @@
 extends ../layout/index 
 
 block contenido
-    h1.text-center.text-2xl.font-extrabold.py-10= pagina
+    h1.text-center.text-2xl.font-extrabold= pagina
 
-    div(class="bg-white shadow py-8 px-6 rounded mx-auto max-w-md 4xl my-4 md:px-15")
+
+    div(class="bg-white shadow py-8 px-6 mx-auto max-w-md 4xl my-4 md:px-15 drop-shadow-2xl rounded-xl")
         form.space-y-5(action="POST")
-        h3.font-medium.text-gray-900-text-center Datos
-        div
-            label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="titulo") Marca
-            input#titulo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="elnombrexd") 
-        div
-            label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="titulo") Modelo
-            input#titulo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="elnombrexd") 
-        div
-            label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="titulo") Serial
-            input#titulo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="elnombrexd") 
-        div
-            label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="titulo") Usuario
-            input#titulo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="elnombrexd") 
+        h3.font-medium.text-gray-900.text-center.mb-6 Datos
+
+        div(class="md:flex md:gap-4 mb-6")
+            div
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Marca") Marca
+                input#marca.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="marca") 
+            div
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Modelo") Modelo
+                input#modelo.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="modelo") 
+        
+        div(class="md:flex md:gap-4 mb-6")
+            div
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Serial") Serial
+                input#serial.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="serial") 
+            div
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Usuario") Usuario
+                input#usuario.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="usuario")
+            
+        div(class="md:flex md:gap-4 mb-6")
+            div(class="md:w-1/2")
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Ubicacion") Ubicación
+                select#ubicacion.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="ubicacion") 
+                    option(value="") - Seleccione -
+                    each ubicacion in ubicaciones
+                        option(value=ubicaciones.id)= ubicacion.sitio
+            div(class="md:w-1/2") 
+                label.block.text-sm.upperacase.text-gray-500.mb-3.font-bold(for="Estado") Estado
+                select#estado.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Toca poner algo aqui" type="text" name="ubicacion") 
+                    option( value="") - Seleccione- 
+                    each estado in estados 
+                        option(value=estados.id)= estado.status
+                    
+            
